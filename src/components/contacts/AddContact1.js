@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 
 class Addcontact extends Component {
-    constructor(props){
-        super(props);
-        this.nameInput = React.createRef();
-        this.emailInput = React.createRef();
-        this.phoneInput = React.createRef();
+    state = {
+        name: "",
+        email: "",
+        phone: ""
     }
+
     onSubmit = (e) => {
         e.preventDefault();
-        const contact = {
-            name: this.nameInput.current.value,
-            email: this.emailInput.current.value,
-            phone: this.phoneInput.current.value
-        }
+        console.log(this.state)
+    }
 
-        console.log(contact)
-    }
-    static defaultProps = {
-        name: 'frank Smith',
-        email: "frank@gmail.com",
-        phone: "777-777-7777"
-    }
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value })
 
     render() {
-        const { name, email, phone } = this.props;
+        const { name, email, phone } = this.state;
         return (
             <div className='card mb-3'>
                <div className="card-header">Add Contact</div>
@@ -37,8 +28,8 @@ class Addcontact extends Component {
                               name="name" 
                               className="form-control form-control-lg" 
                               placeholder='Enter Name...'
-                              defaultValue={name}
-                              ref={this.nameInput}
+                              value={name}
+                              onChange={this.onChange}
                             />
                        </div>
 
@@ -49,8 +40,8 @@ class Addcontact extends Component {
                               name="email" 
                               className="form-control form-control-lg" 
                               placeholder='Enter Email...'
-                              defaultValue={email}
-                              ref={this.emailInput}
+                              value={email}
+                              onChange={this.onChange}
                             />
                        </div>
 
@@ -61,8 +52,8 @@ class Addcontact extends Component {
                               name="phone" 
                               className="form-control form-control-lg" 
                               placeholder='Enter Phone...'
-                              defaultValue={phone}
-                              ref={this.phoneInput}
+                              value={phone}
+                              onChange={this.onChange}
                             />
                        </div>
                        <input type="submit" value="Add Contact" className='btn btn-block btn-light' />
