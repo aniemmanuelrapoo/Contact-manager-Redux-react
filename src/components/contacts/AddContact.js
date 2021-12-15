@@ -6,13 +6,21 @@ class Addcontact extends Component {
         email: "",
         phone: ""
     }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state)
+    }
+
+    onChange = (e) => this.setState({ [e.target.name]: e.target.value })
+
     render() {
         const { name, email, phone } = this.state;
         return (
             <div className='card mb-3'>
                <div className="card-header">Add Contact</div>
                <div className="card-body">
-                   <form>
+                   <form onSubmit={this.onSubmit}>
                        <div className="form-group">
                            <label htmlFor="name">Name</label>
                            <input 
@@ -20,7 +28,8 @@ class Addcontact extends Component {
                               name="name" 
                               className="form-control form-control-lg" 
                               placeholder='Enter Name...'
-                              value={name} 
+                              value={name}
+                              onChange={this.onChange}
                             />
                        </div>
 
@@ -31,7 +40,8 @@ class Addcontact extends Component {
                               name="email" 
                               className="form-control form-control-lg" 
                               placeholder='Enter Email...'
-                              value={email} 
+                              value={email}
+                              onChange={this.onChange}
                             />
                        </div>
 
@@ -42,7 +52,8 @@ class Addcontact extends Component {
                               name="phone" 
                               className="form-control form-control-lg" 
                               placeholder='Enter Phone...'
-                              value={phone} 
+                              value={phone}
+                              onChange={this.onChange}
                             />
                        </div>
                        <input type="submit" value="Add Contact" className='btn btn-block btn-light' />
