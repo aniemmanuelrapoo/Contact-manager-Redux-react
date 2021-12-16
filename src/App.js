@@ -4,7 +4,7 @@ import Header from './components/layout/Header';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Contacts from './components/contacts/Contacts';
 import { Provider } from './context';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import About from './components/pages/About';
 import AddContact from './components/contacts/AddContact';
 
@@ -12,22 +12,22 @@ import AddContact from './components/contacts/AddContact';
 class App extends Component {
   render() {
     return (
+    <Router>
       <Provider>
-        <Router>
           <div className='App'>
           <Header branding="Contact Manager" />
           <div className="container">
-          <Routes>
-            <Route exact path="/" element={<Contacts />} />
-            <Route exact path="/contact/add" element={<AddContact />} />
-            <Route exact path="/about" element={<About />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/"><Contacts /></Route>
+            <Route exact path="/contact/add"><AddContact /></Route>
+            <Route exact path="/about"><About /></Route>
+          </Switch>
           </div>
           </div>
-        </Router>
       </Provider>
+      </Router>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

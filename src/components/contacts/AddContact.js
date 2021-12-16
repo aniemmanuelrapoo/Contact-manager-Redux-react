@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import { v4 as uuidv4 } from 'uuid';
 import TextInputGroup from '../layout/TextInputGroup';
+import { withRouter } from 'react-router-dom';
 
 class AddContact extends Component {
     state = {
@@ -106,4 +107,4 @@ class AddContact extends Component {
     }
 }
 
-export default AddContact;
+export default withRouter(AddContact);
