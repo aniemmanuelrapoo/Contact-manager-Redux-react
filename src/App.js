@@ -21,7 +21,6 @@ class App extends Component {
             <Route exact path="/"><Contacts /></Route>
             <Route exact path="/contact/add"><AddContact /></Route>
             <Route exact path="/about"><About /></Route>
-            <Route exact path="/about"><About /></Route>
           </Switch>
           </div>
           </div>
