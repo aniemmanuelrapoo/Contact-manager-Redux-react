@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router
 import About from './components/pages/About';
 import AddContact from './components/contacts/AddContact';
 import NotFound from './components/pages/NotFound';
+import Test from './components/test/Test';
 
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/"><Contacts /></Route>
             <Route exact path="/contact/add"><AddContact /></Route>
             <Route exact path="/about"><About /></Route>
+            <Route exact path="/test"><Test /></Route>
             <Route><NotFound /></Route>
           </Switch>
           </div>
