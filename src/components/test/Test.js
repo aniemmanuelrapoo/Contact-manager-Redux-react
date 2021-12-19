@@ -35,9 +35,10 @@ class Test extends Component {
     // }
 
     render() {
+        const { title, completed } = this.state
         return (
             <div>
-                <h1>Test Component</h1>
+                <h1>{`The Topic titled ${title} is a ${completed} Topic`}</h1>
             </div>
         );
     }
