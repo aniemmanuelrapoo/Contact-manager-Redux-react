@@ -15,7 +15,7 @@ import EditContact from './components/contacts/EditContact';
 class App extends Component {
   render() {
     return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Provider>
           <div className='App'>
           <Header branding="Contact Manager" />
