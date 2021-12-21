@@ -3,20 +3,21 @@ import './App.css'
 import Header from './components/layout/Header';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Contacts from './components/contacts/Contacts';
-import { Provider } from './context';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import About from './components/pages/About';
 import AddContact from './components/contacts/AddContact';
 import NotFound from './components/pages/NotFound';
 import Test from './components/test/Test';
 import EditContact from './components/contacts/EditContact';
+import { Provider } from 'react-redux';
+import store from './store';
 
 
 class App extends Component {
   render() {
     return (
     <Router basename={process.env.PUBLIC_URL}>
-      <Provider>
+      <Provider store={store}>
           <div className='App'>
           <Header branding="Contact Manager" />
           <div className="container">
@@ -30,7 +31,7 @@ class App extends Component {
           </Switch>
           </div>
           </div>
-      </Provider>
+        </Provider>
       </Router>
     );
   }

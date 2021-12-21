@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-
 class EditContact extends Component {
     state = {
         name: "",
@@ -12,20 +9,7 @@ class EditContact extends Component {
         errors: {}
     }
 
-    async componentDidMount() {
-        const { id } = this.props.match.params;
-        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
-
-        const contact = res.data;
-
-        this.setState({
-            name: contact.name,
-            email: contact.email,
-            phone: contact.phone,
-        })
-    }
-
-    onSubmit = async (dispatch, e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
         const { name, email, phone } = this.state;
 
@@ -51,9 +35,6 @@ class EditContact extends Component {
             phone
         }
         const { id } = this.props.match.params;
-        const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updContact);
-
-        dispatch({ type: 'UPDATE_CONTACT', payload:res.data })
 
         //clear State
         this.setState({
@@ -70,51 +51,43 @@ class EditContact extends Component {
 
     render() {
         const { name, email, phone, errors } = this.state;
-
         return(
-            <Consumer>
-                {value => {
-                    const { dispatch } = value;
-                    return(
-                        <div className='card mb-3'>
-                        <div className="card-header">Edit Contact</div>
-                        <div className="card-body">
-                            <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                                <TextInputGroup
-                                    label="Name"
-                                    name="name"
-                                    placeholder="Enter Name..."
-                                    value={name}
-                                    onChange={this.onChange}
-                                    error={errors.name}
-                                />
+            <div className='card mb-3'>
+            <div className="card-header">Edit Contact</div>
+            <div className="card-body">
+                <form onSubmit={this.onSubmit}>
+                    <TextInputGroup
+                        label="Name"
+                        name="name"
+                        placeholder="Enter Name..."
+                        value={name}
+                        onChange={this.onChange}
+                        error={errors.name}
+                    />
 
-                                <TextInputGroup
-                                    label="Email"
-                                    type="email"
-                                    name="email"
-                                    placeholder="Enter Email..."
-                                    value={email}
-                                    onChange={this.onChange}
-                                    error={errors.email}
-                                />
+                    <TextInputGroup
+                        label="Email"
+                        type="email"
+                        name="email"
+                        placeholder="Enter Email..."
+                        value={email}
+                        onChange={this.onChange}
+                        error={errors.email}
+                    />
 
-                                <TextInputGroup
-                                    label="Phone"
-                                    name="phone"
-                                    placeholder="'Enter Phone..."
-                                    value={phone}
-                                    onChange={this.onChange}
-                                    error={errors.phone}
-                                />
+                    <TextInputGroup
+                        label="Phone"
+                        name="phone"
+                        placeholder="'Enter Phone..."
+                        value={phone}
+                        onChange={this.onChange}
+                        error={errors.phone}
+                    />
 
-                                <input type="submit" value="Update Contact" className='btn btn-block btn-light' />
-                            </form>
-                        </div>
-                        </div>
-                    )
-                }}
-            </Consumer>
+                    <input type="submit" value="Update Contact" className='btn btn-block btn-light' />
+                </form>
+            </div>
+            </div>
         )
     }
 }
