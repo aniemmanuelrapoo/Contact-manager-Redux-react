@@ -1,4 +1,4 @@
-import { GET_CONTACTS } from './types';
+import { ADD_CONTACT, DELETE_CONTACT, GET_CONTACTS } from './types';
 
 export const getContacts = () => {
     return{
@@ -6,6 +6,16 @@ export const getContacts = () => {
     }
 }
 
-const MapDispatchToProps = (dispatch) => ({
-    getContacts: () => dispatch({type: GET_CONTACTS})
-})
+export const deleteContact = (id) => {
+    return{
+        type: DELETE_CONTACT,
+        payload: id
+    }
+}
+
+export const addContact = (contact) => {
+    return{
+        type: ADD_CONTACT,
+        payload: contact
+    }
+}

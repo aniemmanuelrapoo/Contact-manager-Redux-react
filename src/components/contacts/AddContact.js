@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addContact } from '../../actions/contactAction'
+import PropTypes from 'prop-types'
+import { v4 as uuidv4 } from 'uuid';
 
 class AddContact extends Component {
     state = {
@@ -31,12 +35,14 @@ class AddContact extends Component {
         }
 
         const newContact = {
+            id: uuidv4(),
             name,
             email,
             phone
         };
 
         // SUBMIT CONTACT
+        this.props.addContact(newContact)
 
         //clear State
         this.setState({
@@ -94,4 +100,8 @@ class AddContact extends Component {
     }
 }
 
-export default withRouter(AddContact);
+AddContact.propTypes = {
+    addContact: PropTypes.func.isRequired
+}
+
+export default connect(null, { addContact })(withRouter(AddContact));

@@ -35,4 +35,4 @@ const mapStateToProps = (state) => ({
     contacts: state.contact.contacts
 });
 
-export default connect(mapStateToProps, {getContacts})(Contacts);
+export default connect(mapStateToProps, { getContacts })(Contacts);
