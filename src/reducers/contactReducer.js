@@ -1,4 +1,4 @@
-import { GET_CONTACTS } from "../actions/types";
+// import { GET_CONTACTS } from "../actions/types";
 const initialState = {
     contacts: [
         {
