@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
+import { getContact } from '../../actions/contactAction'
 class EditContact extends Component {
     state = {
         name: "",
         email: "",
         phone: "",
         errors: {}
+    }
+
+    componentWillReceiveProps(nextProps, nextState){
+        const { name, email, phone } = nextProps.contact;
+        this.setState({
+            name,
+            email,
+            phone,
+        })
+    }
+
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.getContact(id)
     }
 
     onSubmit = async (e) => {
@@ -34,7 +51,7 @@ class EditContact extends Component {
             email,
             phone
         }
-        const { id } = this.props.match.params;
+        // const { id } = this.props.match.params;
 
         //clear State
         this.setState({
@@ -92,4 +109,12 @@ class EditContact extends Component {
     }
 }
 
-export default withRouter(EditContact);
+EditContact.propTypes = {
+    contact: PropTypes.object.isRequired,
+    getContact: PropTypes.func.isRequired
+}
+const mapStateToProps = state => ({
+    contact: state.contact.contact
+})
+
+export default connect(mapStateToProps, { getContact })(withRouter(EditContact));
