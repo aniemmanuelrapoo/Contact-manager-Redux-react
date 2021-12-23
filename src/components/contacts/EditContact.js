@@ -3,7 +3,7 @@ import TextInputGroup from '../layout/TextInputGroup';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { getContact } from '../../actions/contactAction'
+import { getContact, updateContacts } from '../../actions/contactAction'
 class EditContact extends Component {
     state = {
         name: "",
@@ -26,7 +26,7 @@ class EditContact extends Component {
         this.props.getContact(id)
     }
 
-    onSubmit = async (e) => {
+    onSubmit = (e) => {
         e.preventDefault();
         const { name, email, phone } = this.state;
 
@@ -46,12 +46,16 @@ class EditContact extends Component {
             return;
         }
 
+        const { id } = this.props.match.params;
+
         const updContact = {
+            id,
             name,
             email,
             phone
         }
-        // const { id } = this.props.match.params;
+        
+        this.props.updateContacts(updContact)
 
         //clear State
         this.setState({
@@ -117,4 +121,4 @@ const mapStateToProps = state => ({
     contact: state.contact.contact
 })
 
-export default connect(mapStateToProps, { getContact })(withRouter(EditContact));
+export default connect(mapStateToProps, { getContact, updateContacts })(withRouter(EditContact));
